@@ -22,7 +22,7 @@ public class SmallGridGenerator: IGridGenerator
                 {
                     if (rooms[row, column].GetType() == typeof(Room))
                     {
-                        rooms[row, column] = new EmptyRoom(new Coordinate(row, column));
+                        rooms[row, column] = new Room(new Coordinate(row, column));
                     }
                 }
             }

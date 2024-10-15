@@ -16,12 +16,13 @@ public class Grid
     {
         get => Rooms[coordinate.Row, coordinate.Column];
     }
+
     public List<Room> GetAdjacentRooms(Room room)
     {
         List<Room> adjacentRooms = new();
-        for (int i = room.Coordinate.Row - 1; i <= room.Coordinate.Row + 1 ; i++)
+        for (int i = room.Coordinate.Row - 1; i <= room.Coordinate.Row + 1; i++)
         {
-            for (int j = room.Coordinate.Column - 1; j <= room.Coordinate.Column + 1 ; j++)
+            for (int j = room.Coordinate.Column - 1; j <= room.Coordinate.Column + 1; j++)
             {
                 if (!(i < 0 || j < 0))
                 {
@@ -29,20 +30,22 @@ public class Grid
                 }
             }
         }
+
         return adjacentRooms;
     }
-    
+
     public List<Room> GetNonEmptyAdjacentRooms(Room centerRoom)
     {
 
         List<Room> nonEmptyAdjacentRooms = new();
         foreach (Room room in GetAdjacentRooms(centerRoom))
         {
-            if (room is not EmptyRoom)
+            if (room.GetType() != typeof(Room))
             {
                 nonEmptyAdjacentRooms.Add(room);
             }
-
-            return nonEmptyAdjacentRooms;
         }
+
+        return nonEmptyAdjacentRooms;
     }
+}
