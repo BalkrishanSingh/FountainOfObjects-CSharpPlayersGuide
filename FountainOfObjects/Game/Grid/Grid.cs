@@ -2,54 +2,47 @@ using FountainOfObjects.Game.Grid.Rooms;
 
 namespace FountainOfObjects.Game.Grid;
 
-public class Grid 
+public class Grid
 {
     private Room[,] Rooms { get; }
+
 
     public Grid(Room[,] rooms)
     {
         Rooms = rooms;
     }
 
-    public Room GetRoomAtCoordinate(Coordinate coordinate)
+    public Room this[Coordinate coordinate]
     {
-        for (int row = 0; row < Rooms.GetLength(0); row++)
+        get => Rooms[coordinate.Row, coordinate.Column];
+    }
+    public List<Room> GetAdjacentRooms(Room room)
+    {
+        List<Room> adjacentRooms = new();
+        for (int i = room.Coordinate.Row - 1; i <= room.Coordinate.Row + 1 ; i++)
         {
-            for (int column = 0; column < Rooms.GetLength(1); column++)
+            for (int j = room.Coordinate.Column - 1; j <= room.Coordinate.Column + 1 ; j++)
             {
-                if (Rooms[row, column].Coordinate == coordinate)
+                if (!(i < 0 || j < 0))
                 {
-                    return Rooms[row, column] ;
+                    adjacentRooms.Add(Rooms[i, j]);
                 }
             }
         }
+        return adjacentRooms;
     }
-    public List<Room> GetNonEmptyAdjacentRooms(Room room)
+    
+    public List<Room> GetNonEmptyAdjacentRooms(Room centerRoom)
     {
-        
-        
+
         List<Room> nonEmptyAdjacentRooms = new();
-        foreach (Room possibleAdjacentRoom in Rooms)
+        foreach (Room room in GetAdjacentRooms(centerRoom))
         {
-            if (room.Coordinate.CheckAdjacency(possibleAdjacentRoom.Coordinate) && room is not EmptyRoom)
+            if (room is not EmptyRoom)
             {
-                nonEmptyAdjacentRooms.Add(possibleAdjacentRoom);
+                nonEmptyAdjacentRooms.Add(room);
             }
+
+            return nonEmptyAdjacentRooms;
         }
-        
-        
-        //
-        // for (int i = room.Coordinate.Row - 1; i <= room.Coordinate.Row + 1 ; i++)
-        // {
-        //     for (int j = room.Coordinate.Column - 1; j <= room.Coordinate.Column + 1 ; j++)
-        //     {
-        //         if (!(i < 0 || j < 0) && room is not EmptyRoom)
-        //         {
-        //             nonEmptyAdjacentRooms.Add(Rooms[i, j]);
-        //         }
-        //     }
-        // }
-        //
-        return nonEmptyAdjacentRooms;
     }
-}
