@@ -1,6 +1,6 @@
 using FountainOfObjects.Game.Grid.Rooms;
 
-namespace FountainOfObjects.Game.Grid;
+namespace FountainOfObjects.Game.Grid.Generator;
 
 public class SmallGridGenerator: IGridGenerator
 {
