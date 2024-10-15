@@ -6,16 +6,15 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
 {
     private int Rows { get; } = rows;
     private int Columns { get; } = columns;
-    
+
     public Grid GenerateGrid()
     {
-
         Room[,] rooms = new Room[Rows, Columns];
-        
+
         // Random random = new Random();
         // Dictionary<string,double> roomProbablities= new Dictionary<string, double>();
-        
-        
+
+
         for (int row = 0; row < rooms.GetLength(0); row++)
         {
             for (int column = 0; column < rooms.GetLength(1); column++)
@@ -30,12 +29,10 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
                     {
                         rooms[row, column] = new Room(new Coordinate(row, column));
                     }
-                  
                 }
             }
         }
+
         return new Grid(rooms);
     }
-
-
 }

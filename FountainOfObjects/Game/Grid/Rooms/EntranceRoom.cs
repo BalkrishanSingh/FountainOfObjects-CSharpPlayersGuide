@@ -6,5 +6,5 @@ public class EntranceRoom : Room
     {
     }
 
-    public override string RoomDescription() =>  "You see light coming from the cavern entrance.";
+    public override string RoomDescription() => "You see light coming from the cavern entrance.";
 }
