@@ -15,9 +15,9 @@ public class SmallGridGenerator : IGridGenerator
         rooms[0, 0] = new EntranceRoom(new Coordinate(0, 0));
         rooms[0, 2] = new FountainRoom(new Coordinate(0, 2));
 
-        
+
         // Filling the rest with base Room objects.
-        
+
         for (int row = 0; row < rooms.GetLength(0); row++)
         {
             for (int column = 0; column < rooms.GetLength(1); column++)

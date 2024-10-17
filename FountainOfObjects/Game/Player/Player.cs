@@ -16,7 +16,6 @@ public class Player
         else
         {
             throw new Exception("Entrance room hasn't been made.");
-
         }
     }
 
@@ -31,9 +30,7 @@ public class Player
             Direction.South => new MoveSouth(),
             Direction.West => new MoveWest(),
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
-
         };
         moveCommand.Move(this);
     }
 }
-

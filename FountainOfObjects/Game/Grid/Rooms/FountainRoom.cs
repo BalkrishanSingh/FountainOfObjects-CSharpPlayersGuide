@@ -2,7 +2,7 @@ namespace FountainOfObjects.Game.Grid.Rooms;
 
 public class FountainRoom : Room
 {
-    public bool FountainState { get; private set; }
+    public bool FountainState { get; set; }
 
     public FountainRoom(Coordinate coordinate) : base(coordinate)
     {

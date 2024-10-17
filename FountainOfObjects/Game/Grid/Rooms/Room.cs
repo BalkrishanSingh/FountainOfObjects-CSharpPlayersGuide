@@ -12,6 +12,6 @@ public class Room : IRoomEventHandler
     public void RunRoomEvent()
     {
     }
-    public virtual string RoomDescription() => "There is nothing to see here...";
 
+    public virtual string RoomDescription() => "There is nothing to see here...";
 }
