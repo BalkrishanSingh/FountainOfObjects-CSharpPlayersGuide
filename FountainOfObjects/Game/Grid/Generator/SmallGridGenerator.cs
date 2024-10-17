@@ -4,12 +4,12 @@ namespace FountainOfObjects.Game.Grid.Generator;
 
 public class SmallGridGenerator : IGridGenerator
 {
-    private int Rows { get; } = 4;
-    private int Columns { get; } = 4;
+    public int Rows { get; } = 4;
+    public int Columns { get; } = 4;
 
     public Grid GenerateGrid()
     {
-        Room[,] rooms = new Room[Rows, Columns];
+        Room?[,] rooms = new Room[Rows, Columns];
 
         //Setting fixed locations for the entrance and fountain rooms.
         rooms[0, 0] = new EntranceRoom(new Coordinate(0, 0));
@@ -23,7 +23,7 @@ public class SmallGridGenerator : IGridGenerator
             for (int column = 0; column < rooms.GetLength(1); column++)
             {
                 {
-                    if (rooms[row, column].GetType() == typeof(Room))
+                    if (rooms[row, column] == null)
                     {
                         rooms[row, column] = new Room(new Coordinate(row, column));
                     }
@@ -31,6 +31,6 @@ public class SmallGridGenerator : IGridGenerator
             }
         }
 
-        return new Grid(rooms);
+        return new Grid(rooms!);// There should be no null elements in array after the above loop.
     }
 }

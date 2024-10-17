@@ -50,13 +50,13 @@ public class Game
                 case "move":
                     if (playerCommandStrings.Length > 1)
                     {
-                        if (Enum.TryParse(playerCommandStrings[1], out Direction direction))
+                        if (Enum.TryParse(playerCommandStrings[1],true, out Direction direction))
                         {
                             Player.Move(direction);
                             return;
                         }
 
-                        Console.WriteLine("Invalid direction");
+                        Console.WriteLine("Invalid Direction");
                     }
                     else
                     {
@@ -69,8 +69,7 @@ public class Game
                     IsRunning = false;
                     break;
                 default:
-                    Console.WriteLine("Invalid command");
-                    Console.WriteLine(GameInstructions.CommandInstructions());
+                    Console.WriteLine("Invalid Command");
                     break;
             }
         }
