@@ -1,6 +1,7 @@
 using FountainOfObjects.Game.Grid.Generator;
 using FountainOfObjects.Game.Grid.Room;
 using FountainOfObjects.Game.Player.Commands;
+using Spectre.Console;
 
 namespace FountainOfObjects.Game;
 
@@ -9,6 +10,7 @@ public class Game
     public Player.Player Player { get; }
     public Grid.Grid Grid { get; }
     public bool IsRunning { get; private set; } = true;
+    public int TurnNumber { get; private set; } = 1;
 
     public Game(IGridGenerator generator)
     {
@@ -28,14 +30,18 @@ public class Game
     //TODO Handle victory condition. 
     private void Turn()
     {
-        Console.WriteLine("----------------------------------------------------------------------------------");
-        Console.WriteLine(Player.PositionString());
+        
+        var turnIndicator = new Rule($"[bold purple]Turn{TurnNumber}[/]");
+        AnsiConsole.Write(turnIndicator.RuleStyle("red bold"));
+        
+        AnsiConsole.MarkupLine($"[bold]{Player.PositionString()}");
 
+      
         Room currentRoom = Grid[Player.PlayerPosition];
-        Console.WriteLine(currentRoom.RoomDescription());
+        AnsiConsole.MarkupLineInterpolated($"[bold]{currentRoom.RoomDescription()}");
         HandleUserInput();
+        TurnNumber++;
     }
-
     private void HandleUserInput()
     {
         while (true)
@@ -51,11 +57,11 @@ public class Game
                         if (Enum.TryParse(playerCommandStrings[1], true, out Direction direction)&&  new MoveCommand(Player, direction).Execute())
                             return;
 
-                        Console.WriteLine("Invalid Direction");
+                        AnsiConsole.MarkupLine("[red bold]Invalid Direction[/]");
                     }
                     else
                     {
-                        Console.WriteLine("Enter Direction as well.");
+                        AnsiConsole.MarkupLine("[red bold]Enter Direction as well[/]");
                     }
                     break;
                 case "toggle":
@@ -71,11 +77,11 @@ public class Game
                     break;
 
                 case "exit":
-                    Console.WriteLine("Thank you for playing Fountain Of Objects.");
+                    AnsiConsole.MarkupLine("[green bold]Thank you for playing Fountain Of Objects.[/]");
                     IsRunning = false;
                     return;
                 default:
-                    Console.WriteLine("Invalid Command");
+                    AnsiConsole.MarkupLine("[red bold]Invalid Command[/]");
                     break;
             }
         }
