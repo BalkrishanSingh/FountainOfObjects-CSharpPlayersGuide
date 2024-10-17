@@ -26,7 +26,7 @@ public class Game
             Turn();
         }
     }
-
+    //TODO Handle victory condition. 
     private void Turn()
     {
         Console.WriteLine("----------------------------------------------------------------------------------");
@@ -34,8 +34,6 @@ public class Game
 
         Room currentRoom = Grid[Player.PlayerPosition];
         Console.WriteLine(currentRoom.RoomDescription());
-
-
         HandleUserInput();
     }
 
@@ -62,12 +60,12 @@ public class Game
                     {
                         Console.WriteLine("Enter Direction as well.");
                     }
-
                     break;
+                //TODO Handle fountain enable and disable input.
                 case "exit":
                     Console.WriteLine("Thank you for playing Fountain Of Objects.");
                     IsRunning = false;
-                    break;
+                    return;
                 default:
                     Console.WriteLine("Invalid Command");
                     break;

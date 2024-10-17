@@ -9,7 +9,7 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
 
     public Grid GenerateGrid()
     {
-        Room[,] rooms = new Room[Rows, Columns];
+        Room?[,] rooms = new Room[Rows, Columns];
 
         // Random random = new Random();
         // Dictionary<string,double> roomProbablities= new Dictionary<string, double>();
@@ -19,7 +19,7 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
         {
             for (int column = 0; column < rooms.GetLength(1); column++)
             {
-                if (rooms[row, column].GetType() == typeof(Room))
+                if (rooms[row, column] == null)
                 {
                     if (row == 0 && column == 0)
                     {
@@ -33,6 +33,6 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
             }
         }
 
-        return new Grid(rooms);
+        return new Grid(rooms!);
     }
 }

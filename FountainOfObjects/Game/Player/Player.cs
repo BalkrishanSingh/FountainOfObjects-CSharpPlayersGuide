@@ -21,6 +21,7 @@ public class Player
 
     public string PositionString() => $"You are in the room at {PlayerPosition}";
 
+    //TODO Handle out of index movement. For eg, moving south or west at coordinate (0,0)
     public void Move(Direction direction)
     {
         IPlayerMovable moveCommand = direction switch
