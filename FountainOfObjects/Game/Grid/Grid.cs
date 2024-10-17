@@ -27,7 +27,7 @@ public class Grid
     {
         foreach (var room in Rooms)
         {
-            if (room.GetType() != roomType)
+            if (room.GetType() == roomType)
             {
                 coordinate = room.Coordinate;
                 return true;
