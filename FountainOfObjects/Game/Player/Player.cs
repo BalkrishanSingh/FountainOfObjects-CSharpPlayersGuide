@@ -22,8 +22,9 @@ public class Player
     public string PositionString() => $"You are in the room at {PlayerPosition}";
 
     //TODO Handle out of index movement. For eg, moving south or west at coordinate (0,0)
-    public void Move(Direction direction)
+    public bool Move(Direction direction)
     {
+        Coordinate oldCoordinate = PlayerPosition;
         IPlayerMovable moveCommand = direction switch
         {
             Direction.East => new MoveEast(),
@@ -33,5 +34,12 @@ public class Player
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
         };
         moveCommand.Move(this);
+        if (PlayerPosition.Column < 0 || PlayerPosition.Row < 0)
+        {
+            PlayerPosition = oldCoordinate;
+            return false;
+        }
+
+        return true;
     }
 }

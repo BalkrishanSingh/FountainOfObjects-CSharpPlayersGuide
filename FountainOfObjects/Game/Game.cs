@@ -48,11 +48,9 @@ public class Game
                 case "move":
                     if (playerCommandStrings.Length > 1)
                     {
-                        if (Enum.TryParse(playerCommandStrings[1],true, out Direction direction))
-                        {
-                            Player.Move(direction);
+                        if (Enum.TryParse(playerCommandStrings[1], true, out Direction direction) &&
+                            Player.Move(direction))
                             return;
-                        }
 
                         Console.WriteLine("Invalid Direction");
                     }
