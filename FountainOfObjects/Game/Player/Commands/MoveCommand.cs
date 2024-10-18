@@ -29,9 +29,9 @@ public class MoveCommand(Player player, Direction direction) : IPlayerCommand
         if (player.PlayerPosition.Column < 0 || player.PlayerPosition.Row < 0)
         {
             player.PlayerPosition = oldCoordinate;
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
