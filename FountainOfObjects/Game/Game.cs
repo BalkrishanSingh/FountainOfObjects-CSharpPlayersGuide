@@ -48,8 +48,8 @@ public class Game
                 case "move":
                     if (playerCommandStrings.Length > 1)
                     {
-                        if (Enum.TryParse(playerCommandStrings[1], true, out Direction direction) &&
-                            Player.Move(direction))
+                        //This tries to parse input command to direction and then returns if the movement was sucessful or not.
+                        if (Enum.TryParse(playerCommandStrings[1], true, out Direction direction)&&  new MoveCommand(Player, direction).Execute())
                             return;
 
                         Console.WriteLine("Invalid Direction");
@@ -59,7 +59,18 @@ public class Game
                         Console.WriteLine("Enter Direction as well.");
                     }
                     break;
-                //TODO Handle fountain enable and disable input.
+                case "toggle":
+
+                    if (playerCommandStrings.Length > 1 && playerCommandStrings[1]=="fountain")
+                    {
+                        if (new ToggleFountainCommand(Player,Grid).Execute())
+                        {
+                            return;
+                        }
+                        Console.WriteLine("You aren't in the fountain room.");
+                    }
+                    break;
+
                 case "exit":
                     Console.WriteLine("Thank you for playing Fountain Of Objects.");
                     IsRunning = false;

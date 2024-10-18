@@ -1,4 +1,4 @@
-namespace FountainOfObjects.Game.Player;
+namespace FountainOfObjects.Game;
 
 public static class GameInstructions
 {
