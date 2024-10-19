@@ -1,6 +1,6 @@
-namespace FountainOfObjects.Game.Grid.Rooms;
+namespace FountainOfObjects.Game.Grid.Room;
 
-public record struct Coordinate(int Row, int Column)
+public record Coordinate(int Row, int Column)
 {
     public bool CheckAdjacency(Coordinate coordinate) =>
         CheckDiagonalAdjacency(coordinate) || CheckOrthogonalAdjacency(coordinate);

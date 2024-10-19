@@ -1,50 +1,72 @@
-using FountainOfObjects.Game.Grid.Rooms;
+using FountainOfObjects.Game.Grid.Room;
 
 namespace FountainOfObjects.Game.Grid;
 
 public class Grid
 {
-    private Room[,] Rooms { get; }
+    private Room.Room[,] Rooms { get; }
+    public Dictionary<Type, Coordinate> RoomsCoordinates { get; private set; } = new Dictionary<Type, Coordinate>();
 
-
-    public Grid(Room[,] rooms)
+    public Grid(Room.Room[,] rooms)
     {
         Rooms = rooms;
     }
 
-    public Room this[Coordinate coordinate]
+
+    public Room.Room this[Coordinate coordinate]
     {
         get => Rooms[coordinate.Row, coordinate.Column];
     }
 
+    public Room.Room this[Type roomType]
+    {
+        get
+        {
+            if (RoomsCoordinates.TryGetValue(roomType, out var coordinate))
+            {
+                return this[coordinate];
+            }
+
+        
+            if ( TryFindRoomCoordinate(roomType, out var roomCoordinate))
+            {
+                RoomsCoordinates.Add(roomType, roomCoordinate!); 
+                return this[roomCoordinate!];
+            }
+            
+            throw new KeyNotFoundException($"Room type {roomType.Name} not found");
+        }
+}
+
     /// <summary>
     /// This function returns whether a bool representing if a particular room type exist in the grid and if yes,
-    /// at which location and if no, it returns a Coordinate object at (-1,-1).
+    /// the coordinate of the first one located and if no, null.
     /// </summary>
     /// <param name="roomType"></param>
     /// <param name="coordinate"></param>
-    public bool FindRoom(Type roomType, out Coordinate coordinate)
+    public bool TryFindRoomCoordinate(Type roomType,out Coordinate? coordinate)
     {
         foreach (var room in Rooms)
         {
             if (room.GetType() == roomType)
             {
-                coordinate = room.Coordinate;
-                return true;
+                 coordinate = room.Coordinate;
+                 return true;
+
             }
         }
-
-        coordinate = new Coordinate(-1, -1);
+        coordinate = null;
         return false;
+
     }
 
     /// <summary>
     /// returns all adjacent rooms around a given center room.
     /// </summary>
     /// <param name="centerRoom"></param>
-    private List<Room> GetAdjacentRooms(Room centerRoom)
+    private List<Room.Room> GetAdjacentRooms(Room.Room centerRoom)
     {
-        List<Room> adjacentRooms = new();
+        List<Room.Room> adjacentRooms = new();
         for (int i = centerRoom.Coordinate.Row - 1; i <= centerRoom.Coordinate.Row + 1; i++)
         {
             for (int j = centerRoom.Coordinate.Column - 1; j <= centerRoom.Coordinate.Column + 1; j++)
@@ -63,12 +85,12 @@ public class Grid
     /// returns all adjacent rooms with Events around a given center room.
     /// </summary>
     /// <param name="centerRoom"></param>
-    public List<Room> GetAdjacentEventRooms(Room centerRoom)
+    public List<Room.Room> GetAdjacentEventRooms(Room.Room centerRoom)
     {
-        List<Room> nonEmptyAdjacentRooms = new();
-        foreach (Room room in GetAdjacentRooms(centerRoom))
+        List<Room.Room> nonEmptyAdjacentRooms = new();
+        foreach (Room.Room room in GetAdjacentRooms(centerRoom))
         {
-            if (room.GetType() != typeof(Room))
+            if (room.GetType() != typeof(Room.Room))
             {
                 nonEmptyAdjacentRooms.Add(room);
             }
