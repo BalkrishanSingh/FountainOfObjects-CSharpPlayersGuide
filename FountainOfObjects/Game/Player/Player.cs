@@ -1,4 +1,4 @@
-using FountainOfObjects.Game.Grid.Rooms;
+using FountainOfObjects.Game.Grid.Room;
 
 namespace FountainOfObjects.Game.Player;
 
@@ -8,9 +8,10 @@ public class Player
 
     public Player(Grid.Grid grid)
     {
-        if (grid.FindRoom(typeof(EntranceRoom), out Coordinate coordinate))
+       
+        if ( grid.TryFindRoomCoordinate(typeof(EntranceRoom), out var roomCoordinate ) )
         {
-            PlayerPosition = coordinate;
+            PlayerPosition = roomCoordinate!;
         }
         else
         {

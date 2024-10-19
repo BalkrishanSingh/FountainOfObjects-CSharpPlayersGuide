@@ -1,4 +1,4 @@
-namespace FountainOfObjects.Game.Grid.Rooms;
+namespace FountainOfObjects.Game.Grid.Room;
 
 public class EntranceRoom : Room
 {

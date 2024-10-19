@@ -1,4 +1,4 @@
-using FountainOfObjects.Game.Grid.Rooms;
+using FountainOfObjects.Game.Grid.Room;
 
 namespace FountainOfObjects.Game.Player.Commands;
 

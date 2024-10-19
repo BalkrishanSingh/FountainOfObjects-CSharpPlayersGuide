@@ -1,6 +1,5 @@
 using FountainOfObjects.Game.Grid.Generator;
-using FountainOfObjects.Game.Grid.Rooms;
-using FountainOfObjects.Game.Player;
+using FountainOfObjects.Game.Grid.Room;
 using FountainOfObjects.Game.Player.Commands;
 
 namespace FountainOfObjects.Game;

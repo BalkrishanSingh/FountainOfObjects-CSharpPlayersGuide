@@ -1,4 +1,4 @@
-using FountainOfObjects.Game.Grid.Rooms;
+using FountainOfObjects.Game.Grid.Room;
 
 namespace FountainOfObjects.Game.Grid.Generator;
 
@@ -9,7 +9,7 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
 
     public Grid GenerateGrid()
     {
-        Room?[,] rooms = new Room[Rows, Columns];
+        Room.Room?[,] rooms = new Room.Room[Rows, Columns];
 
         // Random random = new Random();
         // Dictionary<string,double> roomProbablities= new Dictionary<string, double>();
@@ -27,7 +27,7 @@ public class RandomDynamicGridGenerator(int rows, int columns) : IGridGenerator
                     }
                     else
                     {
-                        rooms[row, column] = new Room(new Coordinate(row, column));
+                        rooms[row, column] = new Room.Room(new Coordinate(row, column));
                     }
                 }
             }

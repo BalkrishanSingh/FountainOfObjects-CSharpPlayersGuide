@@ -1,4 +1,4 @@
-namespace FountainOfObjects.Game.Grid.Rooms;
+namespace FountainOfObjects.Game.Grid.Room;
 
 public interface IRoomAlertHandler
 {

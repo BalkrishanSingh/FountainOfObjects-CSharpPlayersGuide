@@ -1,16 +1,12 @@
-namespace FountainOfObjects.Game.Grid.Rooms;
+namespace FountainOfObjects.Game.Grid.Room;
 
-public class Room : IRoomEventHandler
+public class Room 
 {
     public Coordinate Coordinate { get; }
 
     public Room(Coordinate coordinate)
     {
         Coordinate = coordinate;
-    }
-
-    public void RunRoomEvent()
-    {
     }
 
     public virtual string RoomDescription() => "There is nothing to see here...";

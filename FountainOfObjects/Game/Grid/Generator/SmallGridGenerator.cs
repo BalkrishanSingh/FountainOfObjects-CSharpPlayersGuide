@@ -1,4 +1,4 @@
-using FountainOfObjects.Game.Grid.Rooms;
+using FountainOfObjects.Game.Grid.Room;
 
 namespace FountainOfObjects.Game.Grid.Generator;
 
@@ -9,7 +9,7 @@ public class SmallGridGenerator : IGridGenerator
 
     public Grid GenerateGrid()
     {
-        Room?[,] rooms = new Room[Rows, Columns];
+        Room.Room?[,] rooms = new Room.Room[Rows, Columns];
 
         //Setting fixed locations for the entrance and fountain rooms.
         rooms[0, 0] = new EntranceRoom(new Coordinate(0, 0));
@@ -25,7 +25,7 @@ public class SmallGridGenerator : IGridGenerator
                 {
                     if (rooms[row, column] == null)
                     {
-                        rooms[row, column] = new Room(new Coordinate(row, column));
+                        rooms[row, column] = new Room.Room(new Coordinate(row, column));
                     }
                 }
             }

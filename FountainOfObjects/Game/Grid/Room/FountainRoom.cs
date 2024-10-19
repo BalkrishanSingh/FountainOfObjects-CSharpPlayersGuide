@@ -1,9 +1,7 @@
-namespace FountainOfObjects.Game.Grid.Rooms;
+namespace FountainOfObjects.Game.Grid.Room;
 
 public class FountainRoom : Room
 {
-    /// <summary> An enabled fountain is represented by true while false represents a disabled fountain
-    /// </summary>
     public FountainState FountainState { get; set; } = FountainState.Off;
 
     public FountainRoom(Coordinate coordinate) : base(coordinate)
