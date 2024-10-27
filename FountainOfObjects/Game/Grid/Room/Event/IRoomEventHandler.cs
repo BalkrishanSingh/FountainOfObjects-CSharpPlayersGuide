@@ -1,6 +1,6 @@
 namespace FountainOfObjects.Game.Grid.Room;
 
-public interface IRoomEventHandler 
+public interface IRoomEventHandler
 {
-    void Execute();
+    void TriggerEvent();
 }

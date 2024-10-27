@@ -8,6 +8,5 @@ public class Room
     {
         Coordinate = coordinate;
     }
-
     public virtual string RoomDescription() => "There is nothing to see here...";
 }
