@@ -21,6 +21,8 @@ public static class GameInstructions
                               You enter the Cavern of Objects, a maze of rooms filled with dangerous pits in search of the Fountain of Objects.
                               Light is visible only in the entrance, and no other light is seen anywhere in the caverns. You must navigate the Caverns with your other senses.
                               Find the Fountain of Objects, activate it, and return to the entrance.
+                              
+                              You can ask for the commands using help command.
                               """;
         if (GameSettings.EnabledExpansions != null)
         {

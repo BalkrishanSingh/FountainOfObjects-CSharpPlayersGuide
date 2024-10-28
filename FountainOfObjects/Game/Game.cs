@@ -12,6 +12,8 @@ public class Game
     public Player.Player Player { get; }
     public Grid.Grid Grid { get; }
     public GameState GameState { get; set; } = GameState.Ongoing;
+
+    public int TurnNumber { get; set; }
     
     private Room CurrentRoom 
     {
@@ -38,7 +40,6 @@ public class Game
     public void Run()
     {
         Console.WriteLine(GameInstructions.GamePlayInstructions());
-        Console.WriteLine(GameInstructions.CommandInstructions());
         while (GameState == GameState.Ongoing)
         {
             Turn();
@@ -48,7 +49,7 @@ public class Game
         {
             // TODO Special implementation for exit, victory and defeat instead of simple console logging.
             case GameState.Victory:
-                Console.WriteLine("Victory! You have enabled the fountain of objects and returned safely to the outside world.");
+                Console.WriteLine($"Victory! You restored the fountain of objects and returned in {TurnNumber} turns.");
                 break;
             case GameState.Defeat:
                 // There isn't actually any way to lose yet.
@@ -80,6 +81,7 @@ public class Game
             new MoveCommand(Player, direction).Execute())
         {
             TriggerRoomEvent();
+            TurnNumber++;
             return true;
         }
         return false;
@@ -128,7 +130,9 @@ public class Game
                         Console.WriteLine("You aren't in the fountain room.");
                     }
                     break;
-
+                case "help":
+                    Console.WriteLine(GameInstructions.CommandInstructions());
+                    break;
                 case "exit":
                     GameState = GameState.Exited;
                     return;
