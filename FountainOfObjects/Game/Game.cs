@@ -12,10 +12,6 @@ public class Game
     public Player.Player Player { get; }
     public Grid.Grid Grid { get; }
     public GameState GameState { get; set; } = GameState.Ongoing;
-
-    public event Action OnVictory;
-    public event Action OnDefeat;
-    public event Action OnExit;
     
     private Room CurrentRoom 
     {
@@ -50,14 +46,15 @@ public class Game
 
         switch (GameState)
         {
+            // TODO Special implementation for exit, victory and defeat instead of simple console logging.
             case GameState.Victory:
-                OnVictory?.Invoke();
+                Console.WriteLine("Victory! You have enabled the fountain of objects and returned safely to the outside world.");
                 break;
             case GameState.Defeat:
-                OnDefeat?.Invoke();
+                // There isn't actually any way to lose yet.
                 break;
             case GameState.Exited:
-                OnExit?.Invoke();
+                Console.WriteLine("Thank you for playing Fountain Of Objects.");
                 break;
         }
         
@@ -92,7 +89,7 @@ public class Game
     {
         if (RoomToEventHandlerMappings.TryGetValue(CurrentRoom.GetType(), out Type? eventHandlerType))
         {
-            if (Activator.CreateInstance(eventHandlerType) is IRoomEventHandler eventHandler)
+            if (Activator.CreateInstance(eventHandlerType,this) is IRoomEventHandler eventHandler)
             {
                 eventHandler.TriggerEvent();
             }
@@ -133,7 +130,6 @@ public class Game
                     break;
 
                 case "exit":
-                    Console.WriteLine("Thank you for playing Fountain Of Objects.");
                     GameState = GameState.Exited;
                     return;
                 default:
