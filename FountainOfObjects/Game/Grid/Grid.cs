@@ -13,10 +13,7 @@ public class Grid
     }
 
 
-    public Room.Room this[Coordinate coordinate]
-    {
-        get => Rooms[coordinate.Row, coordinate.Column];
-    }
+    public Room.Room this[Coordinate coordinate] => Rooms[coordinate.Row, coordinate.Column];
 
     public Room.Room this[Type roomType]
     {

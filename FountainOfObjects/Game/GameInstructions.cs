@@ -10,6 +10,7 @@ public static class GameInstructions
                 move west
                 move south
                 move east
+                toggle fountain
                 exit
                """;
     }

@@ -1,7 +1,8 @@
-using System.Windows.Input;
+
 using FountainOfObjects.Game.Grid.Generator;
 using FountainOfObjects.Game.Grid.Room;
 using FountainOfObjects.Game.Grid.Room.Event;
+using FountainOfObjects.Game.Player;
 using FountainOfObjects.Game.Player.Commands;
 
 namespace FountainOfObjects.Game;
@@ -10,7 +11,11 @@ public class Game
 {
     public Player.Player Player { get; }
     public Grid.Grid Grid { get; }
-    public bool IsRunning { get; private set; } = true;
+    public GameState GameState { get; set; } = GameState.Ongoing;
+
+    public event Action OnVictory;
+    public event Action OnDefeat;
+    public event Action OnExit;
     
     private Room CurrentRoom 
     {
@@ -38,10 +43,24 @@ public class Game
     {
         Console.WriteLine(GameInstructions.GamePlayInstructions());
         Console.WriteLine(GameInstructions.CommandInstructions());
-        while (IsRunning)
+        while (GameState == GameState.Ongoing)
         {
             Turn();
         }
+
+        switch (GameState)
+        {
+            case GameState.Victory:
+                OnVictory?.Invoke();
+                break;
+            case GameState.Defeat:
+                OnDefeat?.Invoke();
+                break;
+            case GameState.Exited:
+                OnExit?.Invoke();
+                break;
+        }
+        
     }
     //TODO Handle victory condition. 
     private void Turn()
@@ -115,7 +134,7 @@ public class Game
 
                 case "exit":
                     Console.WriteLine("Thank you for playing Fountain Of Objects.");
-                    IsRunning = false;
+                    GameState = GameState.Exited;
                     return;
                 default:
                     Console.WriteLine("Invalid Command");
